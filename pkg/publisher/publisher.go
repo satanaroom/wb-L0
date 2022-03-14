@@ -5,13 +5,14 @@ import (
 	"os"
 
 	stan "github.com/nats-io/stan.go"
+	broker "github.com/satanaroom/L0"
 	"github.com/sirupsen/logrus"
 )
 
 func main() {
 	// Проверка количества переданных аргументов
 	if len(os.Args) == 1 {
-		logrus.Fatalln("no files to publish on server. use: go run publisher.go fileName")
+		logrus.Fatalln(broker.FError)
 	}
 	fileName := os.Args[1]
 	// Получение модели слайсом байт, переданным первым аргументом для отправки в канал
@@ -21,12 +22,12 @@ func main() {
 	}
 
 	// Подключение к серверу "prod"
-	sc, err := stan.Connect("prod", "client-123", stan.NatsURL("nats://localhost:4222"))
+	sc, err := stan.Connect("prod", "publisher", stan.NatsURL("nats://localhost:4222"))
 	// Проверка на возможность подключения
 	if err != nil {
-		logrus.Fatalf("couldn't connect to nats-streaming: %s", err.Error())
+		logrus.Fatalf("%s: %s", broker.NSError, err.Error())
 	} else {
-		logrus.Println("connection to nats-streaming success")
+		logrus.Println(broker.NSSuccess)
 	}
 	defer sc.Close()
 
