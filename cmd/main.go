@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	_ "github.com/lib/pq"
 	broker "github.com/satanaroom/L0"
 	"github.com/satanaroom/L0/pkg/repository"
 	"github.com/satanaroom/L0/pkg/subscriber"
@@ -35,7 +36,6 @@ func main() {
 	// Подписка на канал
 	subscriber.Subscribe(&m)
 	fmt.Println(m)
-
 	db, err := repository.NewPostgresDB(repository.Config{
 		Host:     viper.GetString("db.host"),
 		Port:     viper.GetString("db.port"),
@@ -47,7 +47,6 @@ func main() {
 	if err != nil {
 		logrus.Fatalf("failed to initialize database: %s", err.Error())
 	}
-
 	// srv := new(broker.Server)
 
 	// go func() {

@@ -22,10 +22,10 @@ func main() {
 	}
 
 	// Подключение к серверу "prod"
-	sc, err := stan.Connect("prod", "publisher", stan.NatsURL("nats://localhost:4222"))
+	sc, err := stan.Connect("prod", "publisher")
 	// Проверка на возможность подключения
 	if err != nil {
-		logrus.Fatalf("%s: %s", broker.NSError, err.Error())
+		logrus.Fatalf("%s %s", broker.NSError, err.Error())
 	} else {
 		logrus.Println(broker.NSSuccess)
 	}
