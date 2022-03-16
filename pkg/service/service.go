@@ -1,8 +1,8 @@
-package repository
+package service
 
 import (
-	"github.com/jmoiron/sqlx"
 	broker "github.com/satanaroom/L0"
+	"github.com/satanaroom/L0/pkg/repository"
 )
 
 type Model interface {
@@ -11,12 +11,12 @@ type Model interface {
 	GetModel(orderUid string) (broker.Model, error)
 }
 
-type Repository struct {
+type Service struct {
 	Model
 }
 
-func NewRepository(db *sqlx.DB) *Repository {
-	return &Repository{
-		Model: NewOrderPostgres(db),
+func NewService(repos *repository.Repository) *Service {
+	return &Service{
+		Model: NewOrdersService(repos.Model),
 	}
 }

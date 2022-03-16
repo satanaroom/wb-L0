@@ -33,4 +33,5 @@ func main() {
 
 	// Добавление данных в канал "orders"
 	sc.Publish("orders", m)
+	logrus.Println("[nats] publication success")
 }

@@ -5,10 +5,11 @@ import (
 
 	stan "github.com/nats-io/stan.go"
 	broker "github.com/satanaroom/L0"
+	"github.com/satanaroom/L0/pkg/repository"
 	"github.com/sirupsen/logrus"
 )
 
-func Subscribe(model *broker.Model) {
+func Subscribe(model *broker.Model, repos *repository.Repository) {
 	// Подключение к серверу "prod"
 	sc, err := stan.Connect("prod", "subscriber1", stan.NatsURL("nats://localhost:4222"))
 	// Проверка на возможность подключения
@@ -17,21 +18,17 @@ func Subscribe(model *broker.Model) {
 	} else {
 		logrus.Println(broker.NSSuccess)
 	}
-	defer sc.Close()
 
 	// Подписываемся на канал для чтения данных (последней публикации)
-	sub, err := sc.Subscribe("orders", func(m *stan.Msg) {
+	_, err = sc.Subscribe("orders", func(m *stan.Msg) {
 		err := json.Unmarshal(m.Data, model)
 		if err != nil {
 			logrus.Fatalf("transferred data isn't a json-object: %s", err.Error())
 		}
+		repos.CreateModelMain(*model)
+		repos.CreateModelDeliveries(*model)
 	}, stan.StartWithLastReceived())
 	if err != nil {
 		logrus.Fatalf("couldn't subscribe on orders channel: %s", err.Error())
 	}
-	defer sub.Unsubscribe()
-
-	// w := sync.WaitGroup{}
-	// w.Add(1)
-	// w.Wait()
 }

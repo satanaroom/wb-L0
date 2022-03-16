@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Orders</title>
+</head>
+
+<body>
+	<div class="container">
+		<h1 class="header-text">WILDBERRIES</h1>
+		<div class="main">
+			<h2 class="main-header">
+				Введите пожалуйста номер заказа для пойска информации о нем
+			</h2>
+			<form method="post" class="main-form">
+				<input type="text" name="order_uid" class="main-orderuid" placeholder="Номер заказа">
+				<input type="submit" value="Найти" class="main-search">
+			</form>
+			<p class="main-text"></p>
+		</div>
+	</div>
+	<style>
+		* {
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+
+		body {
+			background: -webkit-gradient(linear, left top, right top, color-stop(0, #cb11ab), to(#481173)) no-repeat;
+			background: linear-gradient(to right, #cb11ab 0, #481173 100%) no-repeat;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			margin: 0;
+			height: 100%;
+		}
+
+		.container {
+			height: 100%;
+		}
+
+		.header-text {
+			margin: 50px 50px 30px;
+			color: white;
+		}
+
+		.main {
+			border-radius: 30px 30px 0 0;
+			background-color: #fff;
+			margin: 0;
+			padding: 50px 50px 0;
+		}
+
+		.main-header {
+			margin: 0;
+			margin-bottom: 20px;
+		}
+
+		.main-text {
+			margin: 0;
+			height: 500px;
+			border: 2px solid #cb11ab;
+			border-radius: 8px;
+			padding: 10px 25px;
+			word-break: break-all;
+			overflow: auto;
+		}
+
+		.main-form {
+			margin-bottom: 20px;
+		}
+
+		.main-orderuid {
+			height: 50px;
+			width: 300px;
+			border: 2px solid #cb11ab;
+			border-radius: 8px;
+			text-indent: 10px;
+		}
+
+		.main-search {
+			padding: 14px 25px;
+			background-color: #cb11ab;
+			border: 2px solid #cb11ab;
+			color: #fff;
+			border-radius: 8px;
+			cursor: pointer;
+			font-size: 16px;
+			font-weight: 700;
+		}
+
+		orderuid {
+			width: 500px;
+		}
+	</style>
+</body>
+
+</html>
