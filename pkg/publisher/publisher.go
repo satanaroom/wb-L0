@@ -22,7 +22,7 @@ func main() {
 	}
 
 	// Подключение к серверу "prod"
-	sc, err := stan.Connect("prod", "publisher")
+	sc, err := stan.Connect("prod", "pub2")
 	// Проверка на возможность подключения
 	if err != nil {
 		logrus.Fatalf("%s %s", broker.NSError, err.Error())

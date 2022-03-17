@@ -5,8 +5,6 @@ import (
 	"github.com/satanaroom/L0/pkg/service"
 )
 
-// "github.com/gin-gonic/gin"
-
 type Handler struct {
 	services *service.Service
 }
@@ -15,11 +13,14 @@ func NewHandler(services *service.Service) *Handler {
 	return &Handler{services: services}
 }
 
+// Метод инициализации роутинга
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 	orders := router.Group("/orders")
 	{
+		// Метод GET загружает HTML-страницу
 		orders.GET("/", h.CreateHTML)
+		// Метод POST посылает id заказа для поиска его в кэше
 		orders.POST("/", h.GetModel)
 	}
 

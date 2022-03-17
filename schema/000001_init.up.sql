@@ -32,26 +32,26 @@ CREATE TABLE deliveries
 
 CREATE TABLE payments
 (
+    payment_id    serial      not null unique,
     transaction   varchar(50) not null unique,
-    order_uid     varchar(50) not null unique,
     request_id    varchar(50),
-    currency      char(3)     not null,
+    currency      varchar(50) not null,
     provider      varchar(50) not null,
     amount        int         not null,
     payment_dt    int         not null,
-    bank          char(5)     not null,
+    bank          varchar(50) not null,
     delivery_cost int         not null,
     goods_total   int         not null,
     custom_fee    int         not null,
     PRIMARY KEY   (transaction),
 
-    FOREIGN KEY (order_uid) REFERENCES orders (order_uid) ON DELETE CASCADE
+    FOREIGN KEY (transaction) REFERENCES orders (order_uid) ON DELETE CASCADE
 );
 
 CREATE TABLE items
 (
     chrt_id      int         not null unique,
-    order_uid    varchar(50) not null unique,
+    order_uid    varchar(50) not null,
     track_number varchar(50) not null,
     price        int         not null,
     rid          varchar(50) not null,
